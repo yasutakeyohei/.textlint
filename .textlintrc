@@ -15,8 +15,30 @@
     }
   },
   "rules": {
-    "preset-ja-technical-writing": true,
-    "preset-jtf-style": true,
+    "preset-ja-technical-writing": {
+      "max-kanji-continuous-len": {
+        max: 8,
+        allow: [
+          "人類史上最高"
+        ]
+      },
+      "ja-no-successive-word": {
+        allow: [
+          "代わる"
+        ]
+      },
+      "no-mix-dearu-desumasu": false,
+      "max-ten": {
+          "max" : 5
+      },
+      "ja-no-mixed-period": {
+        "allowPeriodMarks": ["："],
+      },
+    },
+    "max-kanji-continuous-len": false,
+    "preset-jtf-style": {
+      "1.1.1.本文": false
+    },
     "prh": {
       "rulePaths": [
         "./prh.yml"
