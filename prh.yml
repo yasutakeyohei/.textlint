@@ -6,9 +6,10 @@ rules:
     pattern: 小中学校
 
   # 記号
-  # 半角括弧を全角括弧に
-  - expected: （$1）
-    pattern:  /\((.+?)\)/
+  # 直前に]がない半角括弧を全角括弧に
+  - expected: （$2）
+    pattern:  /(\])?\((.+?)\)/
+    regexpMustEmpty: $1
     specs:
       - from: そうですね(笑)
         to:   そうですね（笑）
@@ -20,15 +21,6 @@ rules:
   # TODO 英単語の前後の空白を殺す
 
   # 開き
-  - expected: いえ
-    pattern:  言え
-    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
-  - expected: いう
-    pattern:  言う
-    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
-  - expected: いわ
-    pattern:  言わ
-    prh: 呼ぶ、で代替するか漢字で書かず、ひらがなで書くと読みやすくなります。
   - expected: さまざま
     pattern:  様々
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
@@ -50,8 +42,8 @@ rules:
   - expected: もつ
     pattern:  持つ
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
-  - expected: とおり
-    pattern:  通り
+  - expected: とおり$1
+    pattern:  /通り([^抜])/
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります。"どおり"のケースもありえます
   - expected: ひととおり
     pattern:  /(一|ひと)通り/
@@ -65,8 +57,8 @@ rules:
   - expected: たとえば
     pattern:  例えば
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
-  - expected: 他の
-    pattern:  ほかの
+  - expected: ほかの
+    pattern:  他の
     prh: ひらがなで書かず、漢字で書くと読みやすくなります
   - expected: 分かる
     pattern:  わかる
@@ -78,7 +70,7 @@ rules:
     pattern:  綺麗
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: こと
-    pattern:  /(工|人|理|幹|記|大|仕|返|無|食|見|議|当)?事(?!情|件|前|後|象|例|実|体|態|項|務|業|柄|故)/
+    pattern:  /(理|記|大|仕|返|無|食|見|議|当|工|知|約束|従|時)?事(?!情|件|前|後|象|例|実|体|態|項|務|業|柄|故|案)/
     regexpMustEmpty: $1
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
     specs:
@@ -95,7 +87,7 @@ rules:
       - from: 当事
         to:   当事
   - expected: $1とき
-    pattern:  /(の)時(?!点|代|々|間)/
+    pattern:  /(の)時(?!点|代|々|間|期)/
     specs:
       - from: その時
         to:   そのとき
@@ -182,7 +174,7 @@ rules:
     pattern:  流行る
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: のよう
-    pattern:  の様
+    pattern:  の様[^々]
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります。
   - expected: まったく
     pattern:  全く
@@ -192,9 +184,6 @@ rules:
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります。
   - expected: あるいは
     pattern:  或いは
-    prh: 漢字で書かず、ひらがなで書くと読みやすくなります。
-  - expected: はじめて
-    pattern:  初めて
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります。
   - expected: どういうとき
     pattern:  どういう時
@@ -219,14 +208,12 @@ rules:
 
   # 通常は、ひとつ。数詞は１つ、漢数字は数えられる固有名詞を指す場合に利用
   - expected: ひとつ
-    pattern:  一つ
+    pattern:  /(一つ)?一つ/
+    regexpMustEmpty: $1
     prh: 通常は、ひとつ。数詞は１つ、漢数字は数えられる固有名詞を指す場合に利用します
   - expected: ふたつ
     pattern:  二つ
     prh: 通常は、ふたつ。数詞は１つ、漢数字は数えられる固有名詞を指す場合に利用
-  - expected: もっとも
-    pattern:  最も
-    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: ちょうど
     pattern:  /(丁度|調度)/
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
@@ -285,8 +272,6 @@ rules:
     expected: 付け加
   - pattern: 関連づけ
     expected: 関連付け
-  - pattern: 受付
-    expected: 受け付け
   - pattern: 位置づけ
     expected: 位置付け
   - pattern: 意味づけ
@@ -295,8 +280,6 @@ rules:
     expected: 気を付
   - pattern: 気づ
     expected: 気付
-  - pattern: 近づ
-    expected: 近付
   - pattern:
       - 検討がつ
       - 検討がつ
@@ -420,10 +403,6 @@ rules:
       - 四つ
     expected: 4つ
   - pattern:
-      - いつつ
-      - 五つ
-    expected: 5つ
-  - pattern:
       - むっつ
       - 六つ
     expected: 6つ
@@ -510,13 +489,6 @@ rules:
     expected: ヵ所
   - pattern: 個所
     expected: 箇所
-  - pattern:
-      - いちから
-      - 1から
-      - 一から
-      - イチから
-      - 0から
-    expected: ゼロから
   - pattern: 曖昧
     expected: あいまい
   - pattern: 敢えて
@@ -577,8 +549,6 @@ rules:
     expected: いずれ
   - pattern: /頂([いかきくけこ])|戴([いかきくけこ])/
     expected: いただ$1
-  - pattern: 至って
-    expected: いたって
   - pattern: 一々
     expected: いちいち
   - pattern: /何時([^間])/
@@ -600,8 +570,6 @@ rules:
   - pattern: ゆう
     expected: いう
   - pattern: /云([いうわっ])/
-    expected: い$1
-  - pattern: /要([らりるれろっ])/
     expected: い$1
   - pattern: /居([るた])/
     expected: い$1
@@ -663,6 +631,8 @@ rules:
       - 綺麗
       - 奇麗
     expected: きれい
+  - pattern: 寄付
+    expected: 寄附
   - pattern: /括([らりるれろっ])/
     expected: くく$1
   - pattern: 下さい
@@ -685,7 +655,7 @@ rules:
     expected: 歳ごろ
   - pattern: 日頃
     expected: 日ごろ
-  - pattern: 頃
+  - pattern: /頃[^(合)]/
     expected: ころ
   - pattern: /遡([らりるれろっ])/
     expected: さかのぼ$1
@@ -703,14 +673,8 @@ rules:
     expected: さら$1
   - pattern: 仕掛け
     expected: しかけ
-  - pattern: 仕方
-    expected: しかた
   - pattern: /([^正率垂安素愚])直に/
     expected: $1じかに
-  - pattern: /仕組([^み])/
-    expected: しくみ$1
-  - pattern: 仕組み
-    expected: しくみ
   - pattern: しし
     expected: し
   - pattern: しだい
@@ -719,8 +683,6 @@ rules:
       - 暫く
       - 暫らく
     expected: しばらく
-  - pattern: いたします
-    expected: します
   - pattern: 所詮
     expected: しょせん
   - pattern:
@@ -771,8 +733,6 @@ rules:
     expected: だいたい
   - pattern: 大抵
     expected: たいてい
-  - pattern: 大変
-    expected: たいへん
   - pattern: 沢山
     expected: たくさん
   - pattern:
@@ -838,7 +798,7 @@ rules:
         to:   持てない
       - from: 消えてなくなる
         to:   消えてなくなる
-  - pattern: /([^捨当立])てる/
+  - pattern: /([^捨当立充建も])てる/
     expected: $1ている
   - pattern: /出来([かがのをは過す損ずなまるたれてそ])/
     expected: でき$1
@@ -877,7 +837,7 @@ rules:
     expected: どこ
   - pattern: 途端
     expected: とたん
-  - pattern: /(ピン)?留([まめ])/
+  - pattern: /(ピン|土)?留([まめ])/
     regexpMustEmpty: $1
     expected: とど$2
     specs:
@@ -889,8 +849,6 @@ rules:
     expected: とはいえ$1
   - pattern: 共に
     expected: ともに
-  - pattern: /捉え([ずなにぬまよらたてるろっ方中])/
-    expected: とらえ$1
   - pattern: 囚わ
     expected: とらわ
   - pattern:
@@ -914,18 +872,14 @@ rules:
     expected: なにがしか
   - pattern: /成り?済ま?([さしすせそ])|成り?すま([さしすせそ])/
     expected: なりすま$1
-  - pattern: なので、
-    expected: ですので、
   - pattern: 何となく
     expected: なんとなく
-  - pattern: /に当た([っらりるれろ])/
-    expected: にあた$1
+  - pattern: /にあた([っらりるれろ])/
+    expected: に当た$1
   - pattern: /難([いく])/
     expected: にく$1
   - pattern: /の様([なにだで])/
     expected: のよう$1
-  - pattern: /育([まみむめもん])/
-    expected: はぐく$1
   - pattern: /([^手])筈/
     expected: $1はず
   - pattern: 甚だ
@@ -964,7 +918,7 @@ rules:
     expected: ふせん
   - pattern: 殆ど
     expected: ほとんど
-  - pattern: 正に
+  - pattern: /([^改公適補])正に/
     expected: まさに
   - pattern:
       - 益々
@@ -1006,7 +960,7 @@ rules:
   - pattern: 目論見
     expected: もくろみ
   - pattern: 勿論
-    expected: もちろん
+    expected: も
   - pattern: 勿体な
     expected: もったいな
   - pattern: もっとも
@@ -1025,8 +979,6 @@ rules:
     expected: やはり
   - pattern: 闇雲
     expected: やみくも
-  - pattern: 止め
-    expected: やめ
   - pattern: やり取り
     expected: やりとり
   - pattern: 他所
@@ -1035,8 +987,8 @@ rules:
     expected: よ$1
   - pattern: 僅か
     expected: わずか
-  - pattern: いい
-    expected: よい
+  - pattern: /([^願伝])いい([^て])/
+    expected: $1よい$2
   - pattern: 心地よ
     expected: 心地良
   - pattern: /判([らりるれろっ])/
@@ -1087,10 +1039,6 @@ rules:
     expected: 組み込$1
   - pattern: /くみこみ([^ま])|組み込み([^ま])|組みこみ([^ま])/
     expected: 組込み$1
-  - pattern: /組合([わいうえおっ])|くみあ([わいうえおっ])/
-    expected: 組み合$1
-  - pattern: /組合([さしすせそっ])|くみあわ([さしすせそっ])/
-    expected: 組み合わ$1
   - pattern: /くみか([わいうえおっ])|組替([わいうえおっ])/
     expected: 組み替$1
   - pattern: /ことな([りるれっ])/
@@ -1275,7 +1223,7 @@ rules:
     expected: 生まれ
   - pattern: それ故
     expected: それゆえ
-  - pattern: /([^事])故に/
+  - pattern: /([^事反])故に/
     expected: $1ゆえに
   - pattern: 程々
     expected: ほどほど
@@ -1299,7 +1247,7 @@ rules:
       - 元々
       - 本々
     expected: もともと
-  - pattern: /基([^数準盤板底礎本金づ])/
+  - pattern: /基([^幹金数準盤板底礎本づ])/
     expected: もと$1
   - pattern: /([^追])及び/
     expected: $1および
@@ -1317,8 +1265,8 @@ rules:
     expected: 始めた
   - pattern: はじま
     expected: 始ま
-  - pattern: はじめ
-    expected: 始め
+  - pattern: /はじめ([^に])/
+    expected: 始め$1
   - pattern: かたまり
     expected: 塊
   - pattern: やりかた
@@ -1327,8 +1275,6 @@ rules:
     expected: あり方
   - pattern: かたち
     expected: 形
-  - pattern: かた
-    expected: 方
   - pattern: 済まな
     expected: すまな
   - pattern: 済みません
@@ -1431,8 +1377,8 @@ rules:
     expected: 危ない
   - pattern: /喜し([かくいけ])/
     expected: 喜ばし$1
-  - pattern: /起([さしすせそらりるれろっ])/
-    expected: 起こ$1
+  - pattern: /([^提])起([さしすせそらりるれろっ])/
+    expected: 起こ$2
   - pattern: /輝し([かくいけ])/
     expected: 輝かし$1
   - pattern: /恐し([かくいけ])/
@@ -1491,10 +1437,6 @@ rules:
     expected: 捨て$1
   - pattern: 成功を納め
     expected: 成功を収め
-  - pattern: /おわ([らりるれろっ][^か])/
-    expected: 終わ$1
-  - pattern: /終([らりるれろっ])/
-    expected: 終わ$1
   - pattern: /集([らりるれろっ])/
     expected: 集ま$1
   - pattern: 充分
@@ -1523,8 +1465,6 @@ rules:
       - でき事
       - 出来ごと
     expected: 出来事
-  - pattern: 適正
-    expected: 適性
   - pattern: /助([たなまれる])/
     expected: 助け$1
   - pattern:
@@ -1544,13 +1484,13 @@ rules:
     expected: 清らか$1
   - pattern: おいたち
     expected: 生い立ち
-  - pattern: /積([らりるれろっ])/
+  - pattern: /[^見]積([らりるれろっ])/
     expected: 積も$1
   - pattern: ご説明
     expected: 説明
   - pattern: 憎しい
     expected: 憎らしい
-  - pattern: /つづ([^つ])/
+  - pattern: /つづ([^つら])/
     expected: 続$1
   - pattern:
       - 取って変
@@ -1561,8 +1501,8 @@ rules:
       - 存知
       - ぞんじ
     expected: 存じ
-  - pattern: だれ
-    expected: 誰
+  - pattern: /だれ([^し])/
+    expected: 誰$1
   - pattern: /断わ([らりるれろっ])/
     expected: 断$1
   - pattern: 内臓
@@ -1605,9 +1545,10 @@ rules:
     expected: 引きず
   - pattern: むずかしい
     expected: 難しい
-  - pattern: /まか([さしすせそ])/
-    expected: 任$1
-  - pattern: /([^っ])伴な|([^っ])ともな/
+  - pattern: /(ご)?まか([さしすせそ])/
+    regexpMustEmpty: $1
+    expected: 任$2
+  - pattern: /([^っ])伴な|([^っこ])ともな/
     expected: $1伴
   - pattern: /悲([まみむめも])/
     expected: 悲し$1
@@ -1635,8 +1576,6 @@ rules:
     expected: 捕らえ$1
   - pattern: /暮([さしすせそ])/
     expected: 暮ら$1
-  - pattern: /([^鮮])明か/
-    expected: $1明らか
   - pattern: もどって
     expected: 戻って
   - pattern:
@@ -1651,28 +1590,20 @@ rules:
     expected: 頼もし$1
   - pattern: /冷([さしすせそ])/
     expected: 冷や$1
-  - pattern: /連([らりるれろっ])|つらな([らりるれろっ])/
-    expected: 連な$1
   - pattern: はさまざま
     expected: はさまざま
   - pattern: /はさ([まみむめもん])/
     expected: 挟$1
-  - pattern: おそれ
-    expected: 恐れ
   - pattern: /([^っ])さきに/
     expected: $1先に
   - pattern: 自分自信
     expected: 自分自身
   - pattern: /満([さしすせそっ])|みた([さしすせそっ])/
     expected: 満た$1
-  - pattern: /([をがに])生か/
-    expected: $1活か
   - pattern: /いとな([まみむめも])/
     expected: 営$1
   - pattern: /かかげ([たてらる])/
     expected: 掲げ$1
-  - pattern: /がた([ちつっ])/
-    expected: が経$1
   - pattern: /うめ([たつて])/
     expected: 埋め$1
   - pattern:
@@ -1695,6 +1626,10 @@ rules:
     expected: 招$1
   - pattern: 子供
     expected: 子ども
+  - pattern: 子ども達
+    expected: こどもたち
+  - pattern: 私達
+    expected: 私たち
   - pattern: 塔載
     expected: 搭載
   - pattern: 一番最初
@@ -1717,8 +1652,18 @@ rules:
     expected: 高嶺の花
   - pattern: たいする
     expected: 対する
-  - pattern: たいし
-    expected: 対し
+  - pattern: /つしやっ([たて])/
+    expected: っしゃっ$1
+  - pattern: /っしやっ([たて])/
+    expected: っしゃっ$1
+  - pattern: /つしゃっ([たて])/
+    expected: っしゃっ$1
+  - pattern: /つしや([らりるれろ])/
+    expected: っしゃ$1
+  - pattern: /っしや([らりるれろ])/
+    expected: っしゃ$1
+  - pattern: /つしゃ([らりるれろ])/
+    expected: っしゃ$1
   - pattern:
       - たずさわ
       - たづさわ
@@ -1733,8 +1678,6 @@ rules:
     expected: 詳し$1
   - pattern: 陽の目
     expected: 日の目
-  - pattern: 保障
-    expected: 保証
   - pattern: 移譲
     expected: 委譲
   - pattern: 稼動
@@ -1934,13 +1877,6 @@ rules:
     pattern:  /アノーテーション/
   - expected: アプレット
     pattern:  /\bApplet\b/
-  - expected: アプリケーション
-    pattern: /アプリ(?!ケ)/
-    specs:
-      - from: アプリケーション
-        to:   アプリケーション
-      - from: アプリ
-        to:   アプリケーション
   - expected: アンダースコア
     pattern:  /アンダーバー/
   - expected: イシュア
@@ -2404,8 +2340,6 @@ rules:
     pattern:  /ローダー/
   - expected: ロングテール
     pattern:  /ロングテイル/
-  - expected: ワーカ
-    pattern:  /ワーカー|\bworker\b/
   - expected: ワンタイムURL
     pattern:  /\bOnetime URL\b/
   - expected: クアッドコアCPU
@@ -2449,10 +2383,6 @@ rules:
     pattern:  /デベロッパ([^ー])|ディベロッパー([^ー])|ディベロッパ([^ー])|ディヴェロッパ([^ー])/
   - expected: ファシリテーター$1
     pattern:  /ファシリテータ([^ー])/
-  - expected: プレイヤー
-    pattern:  /プレーヤ/
-  - expected: プレーヤ
-    pattern:  /プレーヤー/
   - expected: プログラマー$1
     pattern:  /プログラマ([^ー])/
   - expected: プログラマブル
@@ -2915,8 +2845,6 @@ rules:
     pattern:  /\bPayPal\b/i
   - expected: parallel
     pattern:  /\bpararllel\b/
-  - expected: PC
-    pattern:  /パソコン/
   - expected: PECL
     pattern:  /\bPECL\b/i
   - expected: Pentium 4
@@ -3250,11 +3178,6 @@ rules:
     pattern:  /がが/
   - expected: する
     pattern:  /するする/
-  - expected: て
-    pattern:  /(当)?てて/
-    regexpMustEmpty: $1
-  - expected: で
-    pattern:  /でで/
   - expected: $1の
     pattern:  /([^も])のの/
   - expected: は
