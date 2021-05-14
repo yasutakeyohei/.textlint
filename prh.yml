@@ -78,7 +78,7 @@ rules:
     pattern:  綺麗
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: こと
-    pattern:  /(記|大|仕|返|無|食|見|議|当)?事(?!情|件|前|後|象|例|実|体|態|項|務|業|柄|故)/
+    pattern:  /(工|人|理|幹|記|大|仕|返|無|食|見|議|当)?事(?!情|件|前|後|象|例|実|体|態|項|務|業|柄|故)/
     regexpMustEmpty: $1
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
     specs:
@@ -171,9 +171,6 @@ rules:
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: なぜ
     pattern:  何故
-    prh: 漢字で書かず、ひらがなで書くと読みやすくなります
-  - expected: ゆえに
-    pattern:  故に
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: うまく
     pattern:  巧く
@@ -286,8 +283,6 @@ rules:
       - つけ加
       - つけくわ
     expected: 付け加
-  - pattern: つけた
-    expected: 付け足
   - pattern: 関連づけ
     expected: 関連付け
   - pattern: 受付
@@ -1048,8 +1043,6 @@ rules:
     expected: わか$1
   - pattern: /解([らりるれろっ])/
     expected: わか$1
-  - pattern: /の分([^散割類解野離析岐])/
-    expected: のぶん$1
   - pattern:
       - 気をつか
       - 気を使
@@ -1306,7 +1299,7 @@ rules:
       - 元々
       - 本々
     expected: もともと
-  - pattern: /基([^数準盤板底礎本])/
+  - pattern: /基([^数準盤板底礎本金づ])/
     expected: もと$1
   - pattern: /([^追])及び/
     expected: $1および
@@ -1466,8 +1459,6 @@ rules:
     expected: 行$1
   - pattern: あわて
     expected: 慌
-  - pattern: あわ
-    expected: 合わ
   - pattern: /混([らりるれろっ])/
     expected: 混ざ$1
   - pattern: おも([いうわ])
@@ -3229,8 +3220,6 @@ rules:
     pattern:  /\bWindowsXP\b/
   - expected: WordPress
     pattern:  /\bWordPress\b/i
-  - expected: $1Word
-    pattern:  /([^ースォ])ワード/
   - expected: xAuth
     pattern:  /\bxAuth\b/i
   - expected: Xcode
