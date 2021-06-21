@@ -70,7 +70,7 @@ rules:
     pattern:  綺麗
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: こと
-    pattern:  /(理|記|大|仕|返|無|食|見|議|当|工|知|約束|従|時)?事(?!情|件|前|後|象|例|実|体|態|項|務|業|柄|故|案)/
+    pattern:  /(理|記|大|仕|返|無|食|見|議|当|工|知|約束|従|時|刑)?事(?!情|件|前|後|象|例|実|体|態|項|務|業|柄|故|案)/
     regexpMustEmpty: $1
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
     specs:
@@ -987,7 +987,7 @@ rules:
     expected: よ$1
   - pattern: 僅か
     expected: わずか
-  - pattern: /([^願伝])いい([^て])/
+  - pattern: /([^願伝])いい([^てま])/
     expected: $1よい$2
   - pattern: 心地よ
     expected: 心地良
@@ -1445,8 +1445,6 @@ rules:
     expected: 十分
   - pattern: したがう
     expected: 従う
-  - pattern: とりま
-    expected: 取り巻
   - pattern: とうてい
     expected: 到底
   - pattern: /柔か([だない])/
@@ -1694,8 +1692,6 @@ rules:
     expected: 延べ$1
   - pattern: /あつま([らりるれろ])/
     expected: 集ま$1
-  - pattern: /あきらめ([たてなるまよ、])/
-    expected: 諦め$1
   - pattern: 成立ち
     expected: 成り立ち
   - pattern:
@@ -2053,8 +2049,6 @@ rules:
     pattern:  /ストアード/
   - expected: ストレージ
     pattern:  /ストレッジ|ストレジ/
-  - expected: スマートフォン
-    pattern:  /スマフォ|スマホ/
   - expected: スムーズ
     pattern:  /スムース/
   - expected: セキュリティ
@@ -3186,3 +3180,7 @@ rules:
     pattern:  /([^も])のの/
   - expected: は
     pattern:  /はは/
+  - expected: から
+    pattern: ～
+    prh: 一部のスクリーンリーダーで読み上げられません
+
