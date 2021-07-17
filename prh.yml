@@ -1399,8 +1399,6 @@ rules:
     expected: 行$1
   - pattern: あわて
     expected: 慌
-  - pattern: あわ
-    expected: 合わ
   - pattern: /混([らりるれろっ])/
     expected: 混ざ$1
   - pattern: おも([いうわ])
@@ -3136,8 +3134,6 @@ rules:
     pattern:  /\bWindowsXP\b/
   - expected: WordPress
     pattern:  /\bWordPress\b/i
-  - expected: $1Word
-    pattern:  /([^ースォ])ワード/
   - expected: xAuth
     pattern:  /\bxAuth\b/i
   - expected: Xcode
