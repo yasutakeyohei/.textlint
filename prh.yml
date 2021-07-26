@@ -247,9 +247,8 @@ rules:
   - expected: コード補完
     pattern:  コード保管
     prh: コード補完の間違いと思われます。
-
-  - pattern: /つく([らりるれろっ])/
-    expected: 作$1
+  - pattern: /作([らりるれろっ])/
+    expected: つく$1
   - pattern:
       - 結びつ
       - むすびつ
@@ -973,8 +972,8 @@ rules:
     expected: やはり
   - pattern: 闇雲
     expected: やみくも
-  - pattern: やり取り
-    expected: やりとり
+  - pattern: やりとり
+    expected: やり取り
   - pattern: 他所
     expected: よそ
   - pattern: /因([らりるれろっ])|依([らりるれろっ])/
