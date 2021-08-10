@@ -980,7 +980,7 @@ rules:
     expected: よ$1
   - pattern: 僅か
     expected: わずか
-  - pattern: /([^願伝])いい([^てま])/
+  - pattern: /([^願伝])いい([^てまる])/
     expected: $1よい$2
   - pattern: 心地よ
     expected: 心地良
@@ -1370,7 +1370,7 @@ rules:
     expected: 危ない
   - pattern: /喜し([かくいけ])/
     expected: 喜ばし$1
-  - pattern: /([^提])起([さしすせそらりるれろっ])/
+  - pattern: /([^喚提])起([さしすせそらりるれろっ])/
     expected: 起こ$2
   - pattern: /輝し([かくいけ])/
     expected: 輝かし$1
