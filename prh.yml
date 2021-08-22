@@ -70,7 +70,7 @@ rules:
     pattern:  綺麗
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: こと
-    pattern:  /(幹|理|記|大|仕|返|無|食|見|議|当|工|知|約束|従|時|刑|薬)?事(?!情|件|前|後|象|例|実|体|態|項|務|業|柄|故|案)/
+    pattern:  /(人|幹|理|記|大|仕|返|無|食|見|議|当|工|知|約束|従|時|刑|薬)?事(?!情|件|前|後|象|例|実|体|態|項|務|業|柄|故|案)/
     regexpMustEmpty: $1
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
     specs:
@@ -508,8 +508,6 @@ rules:
     expected: あなた
   - pattern: 予め
     expected: あらかじめ
-  - pattern: 改めて
-    expected: あらためて
   - pattern:
       - 有り難
       - 有難
@@ -526,10 +524,6 @@ rules:
     expected: いっこうに
   - pattern: 一旦
     expected: いったん
-  - pattern: 如何
-    expected: いかが
-  - pattern: 如何に
-    expected: いかに
   - pattern: 幾つ
     expected: いくつ
   - pattern: 幾ら
@@ -632,7 +626,7 @@ rules:
     expected: くく$1
   - pattern: 下さい
     expected: ください
-  - pattern: /([^解])決して|([^解])けして/
+  - pattern: /([^解議])決して|([^解])けして/
     expected: $1けっして
   - pattern: /拘([らりるれろっ])/
     expected: こだわ$1
@@ -1258,7 +1252,7 @@ rules:
     expected: 始めた
   - pattern: はじま
     expected: 始ま
-  - pattern: /はじめ([^に])/
+  - pattern: /はじめ([^にと])/
     expected: 始め$1
   - pattern: かたまり
     expected: 塊
@@ -1595,12 +1589,6 @@ rules:
     expected: 掲げ$1
   - pattern: /うめ([たつて])/
     expected: 埋め$1
-  - pattern:
-      - おすすめ
-      - お薦め
-      - お奨め
-      - オススメ
-    expected: お勧め
   - pattern:
       - てがけ
       - 手掛け
