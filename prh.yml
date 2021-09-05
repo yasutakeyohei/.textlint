@@ -826,14 +826,6 @@ rules:
     expected: どこ
   - pattern: 途端
     expected: とたん
-  - pattern: /(ピン|土)?留([まめ])/
-    regexpMustEmpty: $1
-    expected: とど$2
-    specs:
-      - from: ピン留め
-        to:   ピン留め
-      - from: 踏み留まる
-        to:   踏みとどまる
   - pattern: /とは言え([^なまる])/
     expected: とはいえ$1
   - pattern: 共に
@@ -1744,8 +1736,6 @@ rules:
     expected: 胸をなでおろ
   - pattern: /陥い([らりるれろっ])|おちい([らりるれろっ])/
     expected: 陥$1
-  - pattern: /かさ([なね])/
-    expected: 重$1
   - pattern: 情報原
     expected: 情報源
   - pattern: 過度期
@@ -1983,8 +1973,6 @@ rules:
     pattern:  /コンポネント/
   - expected: コントローラ
     pattern:  /コントローラー/
-  - expected: サーバ
-    pattern:  /サーバー/
   - expected: サーブレット
     pattern:
       - Servlet
