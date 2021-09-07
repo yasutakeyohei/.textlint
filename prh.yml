@@ -2275,8 +2275,6 @@ rules:
     pattern:  /リファラー/
   - expected: リポジトリ
     pattern:  /リポジトリー|レポジトリ|レポジトリー/
-  - expected: ルータ
-    pattern:  /ルーター/
   - expected: レイヤ
     pattern:  /(プ)?レイヤー/
     regexpMustEmpty: $1
