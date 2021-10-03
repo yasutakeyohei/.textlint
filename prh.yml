@@ -1440,8 +1440,6 @@ rules:
       - でき事
       - 出来ごと
     expected: 出来事
-  - pattern: /助([たなまれる])/
-    expected: 助け$1
   - pattern:
       - 問合せ
       - 問い合せ
@@ -2061,8 +2059,6 @@ rules:
     pattern:  /データセンタ([^ー])/
   - expected: データ同期
     pattern:  /\bData Sync\b/
-  - expected: チェイン
-    pattern:  /チェーン/
   - expected: ディザスタリカバリ
     pattern:  /ディザスタ・リカバリ/
   - expected: ディスク
