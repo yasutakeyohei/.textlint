@@ -126,8 +126,9 @@ rules:
   - expected: $1ように
     pattern:  /(の)様に/
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
-  - expected: 次$1
-    pattern:  /(?:以下|下記)(の|に)/
+  - expected: 次$3
+    pattern:  /(m|㎡|㎥|kg|g|割)?(以下|下記)(の|に)/
+    regexpMustEmpty: $1
     specs:
       - from: 以下の
         to:   次の
@@ -612,7 +613,7 @@ rules:
     expected: かな$1
   - pattern: 仮名
     expected: かな
-  - pattern: /構([いうわっ])/
+  - pattern: /([^結])構([いうわっ])/
     expected: かま$1
   - pattern: /痒([いかくさみ])/
     expected: かゆ$1
@@ -1268,8 +1269,6 @@ rules:
     expected: のちほど
   - pattern: うしろ
     expected: 後ろ
-  - pattern: 同士
-    expected: どうし
   - pattern:
       - 頭が堅
       - 頭が硬
@@ -1480,7 +1479,7 @@ rules:
     expected: 断$1
   - pattern: 内臓
     expected: 内蔵
-  - pattern: /なか([かでに])/
+  - pattern: /([^(なか)])なか([かでに])/
     expected: 中$1
   - pattern: /なら(ば(?!、)|[びぶべぼん])/
     expected: 並$1
@@ -2344,12 +2343,6 @@ rules:
     pattern:  /プロデューサ([^ー])/
   - expected: プランナー$1
     pattern:  /プランナ([^ー])/
-  - expected: $1マスタ$2
-    pattern:  /(?:([^ム])マスター)|(?:マスター([^.]))/
-  - expected: $1マスタ$2
-    pattern:  /(?:([^ム])\bMaster)|(?:Master\b([^.]))/
-  - expected: $1マスタ$2
-    pattern:  /(?:([^ム])\bmaster)|(?:master\b([^.]))/
   - expected: マネージャー$1
     pattern:  /マネージャ([^ー])/
   - expected: メンテナー$1
