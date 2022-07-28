@@ -2992,8 +2992,6 @@ rules:
     pattern:  /\btDiary\b/i
   - expected: test-unit
     pattern:  /\btest-unit\b/i
-  - expected: Tips
-    pattern:  /\bTips\b/i
   - expected: Tomcat $1
     pattern:  /Tomcat([0-9])/
   - expected: Twitter
@@ -3131,4 +3129,3 @@ rules:
   - expected: から
     pattern: ～
     prh: 一部のスクリーンリーダーで読み上げられません
-
