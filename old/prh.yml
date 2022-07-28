@@ -1,0 +1,4 @@
+version: 1
+rules:
+  - expected: 児童・生徒
+    pattern: 児童生徒

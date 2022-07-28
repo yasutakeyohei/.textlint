@@ -1,0 +1,52 @@
+{
+  "filters": {
+    "allowlist": {
+      "allow": [
+
+      ]
+    }
+  },
+  "rules": {
+    "preset-ja-technical-writing": {
+      "arabic-kanji-numbers": false,
+      "no-exclamation-question-mark": false,
+      "ja-no-weak-phrase": false,
+      "max-kanji-continuous-len": {
+        max: 8,
+        allow: [
+          "人類史上最高"
+        ]
+      },
+      "ja-no-successive-word": {
+        allow: [
+          "代わる"
+        ]
+      },
+      "no-mix-dearu-desumasu": false,
+      "max-ten": {
+          "max" : 5
+      },
+      "ja-no-mixed-period": {
+        "allowPeriodMarks": ["：", "以上", "ついて"],
+      },
+    },
+    "max-kanji-continuous-len": false,
+    "preset-jtf-style": {
+      "1.1.1.本文": false,
+      "4.3.2.大かっこ［］": false,
+      "4.3.7.山かっこ<>": false,
+      "3.3.かっこ類と隣接する文字の間のスペースの有無": false,
+      "3.1.2.全角文字どうし": false,
+    },
+    "prh": {
+      "rulePaths": [
+        "./prh.yml"
+      ]
+    }
+  },
+  "plugins": {
+     "html": {
+         "extensions": [".md"]
+     }
+  }
+}
