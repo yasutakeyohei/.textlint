@@ -466,8 +466,6 @@ rules:
     expected: $1ヵ所
   - pattern: /([何数\\d一二三四五六七八九十０-９])個所/
     expected: $1ヵ所
-  - pattern: ヶ
-    expected: ヵ
   - pattern:
       - 箇月
       - か月
