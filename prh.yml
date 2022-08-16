@@ -127,7 +127,7 @@ rules:
     pattern:  /(の)様に/
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: 次$3
-    pattern:  /(m|㎡|㎥|kg|g|割)?(以下|下記)(の|に)/
+    pattern:  /(m|㎡|㎥|kg|g|割|代|それ|半分|歳)?(以下|下記)(の|に)/
     regexpMustEmpty: $1
     specs:
       - from: 以下の
@@ -786,7 +786,7 @@ rules:
         to:   持てない
       - from: 消えてなくなる
         to:   消えてなくなる
-  - pattern: /([^捨当立充建も])てる/
+  - pattern: /([^捨当立充建打も])てる/
     expected: $1ている
   - pattern: /出来([かがのをは過す損ずなまるたれてそ])/
     expected: でき$1
@@ -860,8 +860,6 @@ rules:
     expected: のよう$1
   - pattern: /([^手])筈/
     expected: $1はず
-  - pattern: 甚だ
-    expected: はなはだ
   - pattern: /孕([まみむめもんっ])/
     expected: はら$1
   - pattern:
