@@ -555,7 +555,7 @@ rules:
     expected: いろんな
   - pattern: 所謂
     expected: いわゆる
-  - pattern: ゆう
+  - pattern: /ゆう[^(や)]/
     expected: いう
   - pattern: /云([いうわっ])/
     expected: い$1
@@ -1223,7 +1223,7 @@ rules:
       - 元々
       - 本々
     expected: もともと
-  - pattern: /基([^幹金数準盤板底礎本づ])/
+  - pattern: /基([^幹金数準盤板底礎本づ地])/
     expected: もと$1
   - pattern: /([^追])及び/
     expected: $1および
